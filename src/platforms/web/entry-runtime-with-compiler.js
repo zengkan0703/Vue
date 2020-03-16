@@ -15,6 +15,7 @@ const idToTemplate = cached(id => {
 })
 
 const mount = Vue.prototype.$mount
+// 覆盖 $mount，执行模板的解析和编译编译
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
@@ -61,7 +62,7 @@ Vue.prototype.$mount = function (
       if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
         mark('compile')
       }
-
+      // 得到渲染函数
       const { render, staticRenderFns } = compileToFunctions(template, {
         outputSourceRange: process.env.NODE_ENV !== 'production',
         shouldDecodeNewlines,
@@ -79,6 +80,7 @@ Vue.prototype.$mount = function (
       }
     }
   }
+  // 执行挂载
   return mount.call(this, el, hydrating)
 }
 
