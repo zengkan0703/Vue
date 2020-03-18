@@ -2378,6 +2378,7 @@
     var i, c, lastIndex, last;
     for (i = 0; i < children.length; i++) {
       c = children[i];
+      // 未定义或是布尔值
       if (isUndef(c) || typeof c === 'boolean') { continue }
       lastIndex = res.length - 1;
       last = res[lastIndex];
@@ -2392,6 +2393,7 @@
           }
           res.push.apply(res, c);
         }
+        // c 是string、Number、Symbol、Boolean
       } else if (isPrimitive(c)) {
         if (isTextNode(last)) {
           // merge adjacent text nodes
@@ -4065,6 +4067,7 @@
     // we set this to vm._watcher inside the watcher's constructor
     // since the watcher's initial patch may call $forceUpdate (e.g. inside child
     // component's mounted hook), which relies on vm._watcher being already defined
+    // 创建 watcher
     new Watcher(vm, updateComponent, noop, {
       before: function before () {
         if (vm._isMounted && !vm._isDestroyed) {
@@ -11893,6 +11896,7 @@
     el = el && query(el);
 
     /* istanbul ignore if */
+    // Vue 不能挂载在 body 或 html 元素上
     if (el === document.body || el === document.documentElement) {
        warn(
         "Do not mount Vue to <html> or <body> - mount to normal elements instead."

@@ -45,6 +45,7 @@ function normalizeArrayChildren (children: any, nestedIndex?: string): Array<VNo
   let i, c, lastIndex, last
   for (i = 0; i < children.length; i++) {
     c = children[i]
+    // 未定义或是布尔值
     if (isUndef(c) || typeof c === 'boolean') continue
     lastIndex = res.length - 1
     last = res[lastIndex]
@@ -59,6 +60,7 @@ function normalizeArrayChildren (children: any, nestedIndex?: string): Array<VNo
         }
         res.push.apply(res, c)
       }
+      // c 是string、Number、Symbol、Boolean
     } else if (isPrimitive(c)) {
       if (isTextNode(last)) {
         // merge adjacent text nodes
