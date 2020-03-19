@@ -15,11 +15,11 @@ function Vue (options) {
   // 通过 initMixin 方法添加 _init 函数
   this._init(options)
 }
-
+// Vue 实例中一些实例方法的初始化
 initMixin(Vue)
-stateMixin(Vue)
-eventsMixin(Vue)
-lifecycleMixin(Vue)
-renderMixin(Vue)
+stateMixin(Vue) // $set $watch $delete 方法
+eventsMixin(Vue) // $on $off $emit $once
+lifecycleMixin(Vue) // $forceUpdate $destroy _update 
+renderMixin(Vue) // $nextTick _render
 
 export default Vue
