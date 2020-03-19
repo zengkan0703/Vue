@@ -1,4 +1,4 @@
-#### Vue 初始化的过程
+### Vue 初始化的过程
 
 也就是 new Vue 的流程
 
@@ -22,7 +22,7 @@
 
 
 
-#### mount 流程
+### mount 流程
 
 vm.$options.el 存在 ==> 执行 entry-runtime-with-compiler.js $mount
 
