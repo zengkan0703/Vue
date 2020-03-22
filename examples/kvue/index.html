@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极简 Vue demo</title>
+  <script src="./vue/index.js"></script>
+  <!-- <script src="../../dist/vue.js"></script> -->
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+    <h1>{{ num2 }}</h1>
+    <h2>{{ num2 }}</h2>
+    <h2>{{ num }}</h2>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        num: 0,
+        num2: 1
+      }
+    })
+    setInterval(() => {
+      app.num ++;
+      app.num2 += 2;
+    }, 1000)
+  </script>
+</body>
+</html>
