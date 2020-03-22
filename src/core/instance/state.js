@@ -123,10 +123,12 @@ function initData (vm: Component) {
     )
   }
   // proxy data on instance
+  // 代理 data 到实例上
   const keys = Object.keys(data)
   const props = vm.$options.props
   const methods = vm.$options.methods
   let i = keys.length
+  // 判断 data 中是否有和 prop methods 重名的部分
   while (i--) {
     const key = keys[i]
     if (process.env.NODE_ENV !== 'production') {
@@ -148,6 +150,7 @@ function initData (vm: Component) {
     }
   }
   // observe data
+  // 数据响应式化
   observe(data, true /* asRootData */)
 }
 
