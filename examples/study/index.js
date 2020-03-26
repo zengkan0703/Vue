@@ -1,8 +1,11 @@
 /* global Vue */
-new Vue({
+const a = new Vue({
   el: "#app",
   data: {
-    name: "曾侃"
+    name: "曾侃",
+    config: {
+      age: 20
+    }
   },
   render(h) {
     return h("div", {}, [
@@ -11,3 +14,4 @@ new Vue({
     ])
   }
 })
+console.log(a)
