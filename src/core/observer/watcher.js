@@ -99,6 +99,7 @@ export default class Watcher {
    * Evaluate the getter, and re-collect dependencies.
    */
   get () {
+    // 设置 Dep.target 为当前 watcher 实例
     pushTarget(this)
     let value
     const vm = this.vm
@@ -131,6 +132,7 @@ export default class Watcher {
       this.newDepIds.add(id)
       this.newDeps.push(dep)
       if (!this.depIds.has(id)) {
+        // 把当前 watcher 实例添加到当前 Dep 实例的 subs 中
         dep.addSub(this)
       }
     }
