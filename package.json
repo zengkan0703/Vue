@@ -1,0 +1,26 @@
+{
+  "name": "vue-study",
+  "version": "1.0.0",
+  "description": "自己学习 vue 源码的一些记录",
+  "main": "./my/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zengkan0703/vue.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zengkan0703/vue/issues"
+  },
+  "homepage": "https://github.com/zengkan0703/vue#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^4.2.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
