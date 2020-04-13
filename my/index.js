@@ -2,6 +2,10 @@ import $watch from "./observer/$watch";
 import observe from "./observer/index.js";
 
 Object.prototype.$watch = $watch;
+Object.defineProperty(Object.prototype, "$watch", {
+  enumerable: false,
+  value: $watch
+})
 const data = {
   a: 2,
   b: [1,2],

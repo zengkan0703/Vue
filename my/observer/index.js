@@ -9,6 +9,10 @@ function defineReactive(data, key, val) {
     get() {
       dep.depend();
       if (childOb) {
+        // 为什么要给孩子的 dep 收集依赖？
+        // 这个主要是为了收集数组的依赖
+        // 比如数据 data: { a: [1, 2] }, 在操作 data.a 时，必然会先触发 data.a 的 getter，
+        // 所以在 data.a 中触发 data.a 这个数组的依赖收集，就可以在 data.a 变化时发出通知了
         childOb.dep.depend();
       }
       return val;
