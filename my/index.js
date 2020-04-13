@@ -12,7 +12,7 @@ const data = {
   }
 };
 observe(data)
-data.$watch("a", (newVal, old) => {
+const unwatchA = data.$watch("a", (newVal, old) => {
   console.log(`a变化了${old} ---> ${newVal}`)
 })
 data.$watch("b", (newVal, old) => {
@@ -26,6 +26,7 @@ setTimeout(() => {
   data.b.push({f: 5})
   data.c.d.e = 90
   setTimeout(() => {
+    // 测试下新 push 进来的数组元素是否响应
     data.$watch("b.2.f", (newVal, old) => {
       console.log(`b.2.f变化了${old} ---> ${newVal}`)
     })
@@ -33,17 +34,8 @@ setTimeout(() => {
   }, 500)
 },1000)
 
-// const data = {
-//   list: [1,2, {a: 2}]
-// };
-// observe(data);
-// data.$watch("list.2.a", (newVal, old) => {
-//   console.log(`list.2.a变化了${old} ---> ${newVal}`)
-// })
-// data.$watch("list", (newVal, old) => {
-//   console.log(`list 变化了${old} ---> ${newVal}`)
-// })
-// setTimeout(() => {
-//   data.list[2].a = 6;
-//   data.list.push("999")
-// }, 1000)
+setTimeout(() => {
+  // 取消监听
+  unwatchA();
+  data.a = 10;
+}, 2000)

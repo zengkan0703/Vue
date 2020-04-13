@@ -11,5 +11,8 @@ import Watcher from "./watcher";
  */
 export default function $watch(expOrFn, cb, options) {
   const vm = this;
-  new Watcher(vm, expOrFn, cb);
+  const watcher = new Watcher(vm, expOrFn, cb);
+  return function unwatch() {
+    watcher.teardown();
+  }
 }

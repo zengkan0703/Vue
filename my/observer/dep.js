@@ -19,7 +19,7 @@ export default class Dep {
     }
   }
   removeSub(sub) {
-    const index = this.subs.findIndex(sub);
+    const index = this.subs.findIndex(d => d === sub);
     if (index !== -1) {
       this.subs.splice(index, 1);
     }

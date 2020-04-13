@@ -36,6 +36,10 @@ export default class Watcher {
     this.value = this.get();
     this.cb.call(this.vm, this.value, oldVal);
   }
+  // 把自己从各种 Dep 的依赖中清除掉
+  teardown() {
+    this.deps.forEach(dep => dep.removeSub(this))
+  }
 }
 // 解析路径，返回获取目标值的函数
 function parseExp(exp) {
