@@ -21,7 +21,6 @@ data.$watch("b", (newVal, old) => {
 data.$watch("c.d.e", (newVal, old) => {
   console.log(`c.d.e变化了${old} ---> ${newVal}`)
 })
-console.log(data)
 setTimeout(() => {
   data.a = 100
   data.b = 30

@@ -17,8 +17,8 @@ function defineReactive(data, key, val) {
       if (newVal === val) {
         return;
       }
-      dep.notify();
       val = newVal;
+      dep.notify();
     }
   })
 }
