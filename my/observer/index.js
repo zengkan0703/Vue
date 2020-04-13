@@ -3,8 +3,8 @@ import { arrayMethods } from "./array";
 
 // 最基础的响应式原理
 function defineReactive(data, key, val) {
-  const childOb = this.observe(val);
-  const dep = new Dep;
+  const childOb = observe(val);
+  const dep = new Dep();
   Object.defineProperty(data, key, {
     get() {
       dep.depend();
@@ -26,7 +26,6 @@ function defineReactive(data, key, val) {
 // 直接对数据进行
 class Observer {
   constructor(data) {
-    this.data = data;
     this.dep = new Dep(); // 方便 arrayMethods 的方法中能够拿到 dep 进行更新通知
     if (Array.isArray(data)) {
       // 数组
@@ -49,7 +48,7 @@ class Observer {
   }
 }
 
-function observe(value) {
+export default function observe(value) {
   if (typeof value !== "object") {
     return;
   }

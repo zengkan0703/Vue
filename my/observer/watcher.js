@@ -9,7 +9,11 @@ export default class Watcher {
     } else {
       this.getter = parseExp(expOrFn);
     }
+    this.depsId = new Set();
+    this.deps = [];
     this.cb = cb;
+    // this.get() 要放在最后，在这里面就会进行依赖收集
+    // 如果放在前面，this.depsId  this.deps 就会在没有声明时使用，导致报错
     this.value = this.get();
   }
   get() {
@@ -18,6 +22,14 @@ export default class Watcher {
     const value = this.getter.call(this.vm, this.vm);
     Dep.target = undefined;
     return value;
+  }
+  addDep(dep) {
+    // 避免重复插入
+    if (!this.depsId.has(dep.id)) {
+      this.deps.push(dep);
+      dep.addSub(this);
+      this.depsId.add(dep.id);
+    }
   }
   update() {
     const oldVal = this.value;
