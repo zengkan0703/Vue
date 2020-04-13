@@ -19,7 +19,8 @@ methodsKeys.forEach(method => {
           inserted = [params[2]];
           break;
       }
-      const value = arrayPrototype[method](...params);
+      // 要用 call 或者 apply 绑定下 this，否则就不是给当前数组执行的
+      const value = arrayPrototype[method].call(this, ...params);
       const ob = this.__ob__;
       // 数组有变化时通知更新
       ob.dep.notify();

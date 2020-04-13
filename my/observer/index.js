@@ -29,7 +29,7 @@ class Observer {
     this.dep = new Dep(); // 方便 arrayMethods 的方法中能够拿到 dep 进行更新通知
     if (Array.isArray(data)) {
       // 数组
-      arr.__proto__ = arrayMethods;
+      data.__proto__ = arrayMethods;
       this.arrayReactive(data);
     } else {
       this.walk(data);
