@@ -9,9 +9,12 @@ import Watcher from "./watcher";
  * 
  * 返回值：{Function} unwatch
  */
-export default function $watch(expOrFn, cb, options) {
+export default function $watch(expOrFn, cb, options = {}) {
   const vm = this;
-  const watcher = new Watcher(vm, expOrFn, cb);
+  const watcher = new Watcher(vm, expOrFn, cb, options);
+  if (options.immediate) {
+    cb.call(vm, watcher.value)
+  }
   return function unwatch() {
     watcher.teardown();
   }

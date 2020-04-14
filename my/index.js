@@ -19,13 +19,16 @@ const data = {
 observe(data)
 const unwatchA = data.$watch("a", (newVal, old) => {
   console.log(`a变化了${old} ---> ${newVal}`)
-})
+}, {immediate:true})
 data.$watch("b", (newVal, old) => {
   console.log(`b变化了${old} ---> ${newVal}`)
 })
 data.$watch("c.d.e", (newVal, old) => {
   console.log(`c.d.e变化了${old} ---> ${newVal}`)
 })
+data.$watch("c", (newVal, old) => {
+  console.log(`c 或者 c 的子值变化了`, newVal)
+}, {deep: true})
 setTimeout(() => {
   data.a = 100
   data.f = 200

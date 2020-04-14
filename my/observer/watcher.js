@@ -2,8 +2,9 @@ import Dep from "./dep";
 
 // 用来管理具体的更新函数
 export default class Watcher {
-  constructor(vm, expOrFn, cb) {
+  constructor(vm, expOrFn, cb, options = {}) {
     this.vm = vm;
+    this.deep = options.deep;
     if (typeof expOrFn === "function") {
       this.getter = expOrFn;
     } else {
@@ -20,6 +21,10 @@ export default class Watcher {
     Dep.target = this;
     // 访问对应的值，来触发该值的 getter，从而触发 Dep 收集依赖
     const value = this.getter.call(this.vm, this.vm);
+    // 如果有 deep 参数，则
+    if (this.deep) {
+      traverse(value);
+    }
     Dep.target = undefined;
     return value;
   }
@@ -54,5 +59,38 @@ function parseExp(exp) {
       obj = obj[arr[i]];
     }
     return obj
+  }
+}
+// 遍历数据的所有子值，触发子值的依赖收集
+function traverse(value) {
+  const seedSet = new Set();
+  _traverse(value, seedSet);
+  seedSet.clear();
+}
+function isObj(val) {
+  return Object.prototype.toString.call(val) === "[object Object]";
+}
+function _traverse(value, seen) {
+  if (!Array.isArray(value) && !isObj(value) || Object.isFrozen(value)) {
+    return;
+  }
+  if (value.hasOwnProperty("__ob__")) {
+    const depid = value.__ob__.dep.id;
+    if (seen.has(depid)) {
+      return;
+    }
+    seen.add(depid)
+  }
+  if (Array.isArray(value)) {
+    let i = 0;
+    while(i --) {
+      _traverse(value[i], seen)
+    }
+  } else {
+    const keys = Object.keys(value);
+    let i = keys.length;
+    while(i --) {
+      _traverse(value[keys[i]], seen)
+    }
   }
 }
