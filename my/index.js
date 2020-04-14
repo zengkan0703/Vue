@@ -8,6 +8,7 @@ Object.defineProperty(Object.prototype, "$watch", {
 })
 const data = {
   a: 2,
+  f: 2,
   b: [1,2],
   c: {
     d: {
@@ -27,6 +28,7 @@ data.$watch("c.d.e", (newVal, old) => {
 })
 setTimeout(() => {
   data.a = 100
+  data.f = 200
   data.b.push({f: 5})
   data.c.d.e = 90
   setTimeout(() => {
@@ -43,3 +45,10 @@ setTimeout(() => {
   unwatchA();
   data.a = 10;
 }, 2000)
+
+// $watch 第一个参数是函数 
+data.$watch(function() {
+  return data.a + data.f
+}, (newVlaue, old) => {
+  console.log(`data.a + data.f 变化了，${old} ===> ${newVlaue}`)
+})
