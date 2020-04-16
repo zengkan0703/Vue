@@ -7,9 +7,14 @@ const a = new Vue({
       age: 20
     }
   },
+  mounted() {
+    setTimeout(() => {
+      this.name = "zengkan";
+    },1000)
+  },
   render(h) {
     return h("div", {}, [
-      "aaa",
+      this.name,
       {text: "777"}
     ])
   }
